@@ -46,94 +46,36 @@ public class Menu {
         mapaAbuelo.get(2).getDatos().get(7).getDatos().put(15, new Persona(15, "Viviana", "Ordoñez"));
         mapaAbuelo.get(2).getDatos().get(8).getDatos().put(16, new Persona(16, "Diana", "Ordoñez"));
     }
-/*
-    private void buscar(int codigo) {
-        if (mapaAbuelo.containsKey(codigo)) {
-            System.out.println("Abuelo: " + mapaAbuelo.get(codigo).getNombre() + " " + mapaAbuelo.get(codigo).getApellido()
-                    + " Padres :");
-
-            Iterator it = mapaAbuelo.get(codigo).getDatos().keySet().iterator();
-            while (it.hasNext()) {
-                int i = Integer.parseInt(it.next().toString());
-                System.out.println(mapaAbuelo.get(codigo).getDatos().get(i).getNombre() + " "
-                        + mapaAbuelo.get(codigo).getDatos().get(i).getApellido() + ".");
-
-                System.out.println("Nietos: ");
-                Iterator itera = mapaAbuelo.get(codigo).getDatos().get(i).getDatos().keySet().iterator();
-                while (itera.hasNext()) {
-                    int j = Integer.parseInt(itera.next().toString());
-                    System.out.println(mapaAbuelo.get(codigo).getDatos().get(i).getDatos().get(j).getNombre() + " "
-                            + mapaAbuelo.get(codigo).getDatos().get(i).getDatos().get(j).getApellido());
-                }
-            }
-        } else {
-            Iterator it = mapaAbuelo.keySet().iterator();
-            while (it.hasNext()) {
-                int i = Integer.parseInt(it.next().toString());
-                if (mapaAbuelo.get(i).getDatos().containsKey(codigo)) {
-                    System.out.println("Padre: " + mapaAbuelo.get(i).getDatos().get(codigo).getNombre() + " "
-                            + mapaAbuelo.get(i).getDatos().get(codigo).getApellido() + " Abuelo : "
-                            + mapaAbuelo.get(i).getNombre() + " " + mapaAbuelo.get(i).getApellido() + " Hijos: ");
-
-                    Iterator itera = mapaAbuelo.get(i).getDatos().get(codigo).getDatos().keySet().iterator();
-
-                    while (itera.hasNext()) {
-                        int j = Integer.parseInt(itera.next().toString());
-                        System.out.println(mapaAbuelo.get(i).getDatos().get(codigo).getDatos().get(j).getNombre() + " "
-                                + mapaAbuelo.get(i).getDatos().get(codigo).getDatos().get(j).getApellido());
-                    }
-                } else {
-                    Iterator itera = mapaAbuelo.get(i).getDatos().keySet().iterator();
-                    while (itera.hasNext()) {
-                        int j = Integer.parseInt(itera.next().toString());
-                        if (mapaAbuelo.get(i).getDatos().get(j).getDatos().containsKey(codigo)) {
-                            System.out.println("Hijo " + mapaAbuelo.get(i).getDatos().get(j).getDatos().get(codigo).getNombre()
-                                    + " " + mapaAbuelo.get(i).getDatos().get(j).getDatos().get(codigo).getApellido()
-                                    + " Padre" + mapaAbuelo.get(i).getDatos().get(j).getNombre() + " "
-                                    + mapaAbuelo.get(i).getDatos().get(j).getApellido() + "\n Abuelo: " + mapaAbuelo.get(i).getNombre()
-                                    + " " + mapaAbuelo.get(i).getApellido());
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
 
     private void buscar(int codigo) {
-        
-       boolean verificar = false;
-       
-        for (Integer key : mapaAbuelo.keySet()) {
+        for(Integer key: mapaAbuelo.keySet()){
             Persona pAbuelo = mapaAbuelo.get(key);
-            if (codigo == pAbuelo.getDocumento()) {
-                verificar = true;
+            if(codigo == key){
+                System.out.println("Abuelo: " + pAbuelo.getNombre());
             }
-    //        System.out.println(pAbuelo.getNombre());
-            for (Integer key2 : pAbuelo.getDatos().keySet()) {
+            for(Integer key2: pAbuelo.getDatos().keySet()){
                 Persona pPadre = pAbuelo.getDatos().get(key2);
-                if (codigo == pPadre.getDocumento()) {
-                    verificar = true;
+                if(codigo == key2){                    
+                    System.out.println("Abuelo: " + pAbuelo.getNombre());
+                    System.out.println("            Padre: " + pPadre.getNombre());
                 }
-    //            System.out.println("   " + pPadre.getNombre());
-                for (Integer key3 : pPadre.getDatos().keySet()) {
+                if(codigo == key){
+                    System.out.println("Padre : " + pPadre.getNombre());
+                }
+                for(Integer key3: pPadre.getDatos().keySet()){
                     Persona pHijo = pPadre.getDatos().get(key3);
-                    if (codigo == pHijo.getDocumento()) {
-                        verificar = true;                        
+                    if(codigo == key3){
+                        System.out.println("Hijo: " + pHijo.getNombre());
+                        System.out.println("          Padre: " + pPadre.getNombre());
+                        System.out.println("                      Abuelo: " + pAbuelo.getNombre());
+                        break;
                     }
-                    if ( verificar == true) {
-                        System.out.println("Abuelo:  " + pAbuelo.getNombre());
-                        System.out.println("         Padre:  " + pPadre.getNombre());
-                        System.out.println("                     Hijo : " + pHijo.getNombre());
-                        verificar = false;
-                        
+                    if(codigo == key2){
+                        System.out.println("Hijo: " + pHijo.getNombre());
                     }
-    //                System.out.println("       " + pHijo.getNombre());
                 }
             }
-            
-        }
-        
+        }        
     }
     
 }
