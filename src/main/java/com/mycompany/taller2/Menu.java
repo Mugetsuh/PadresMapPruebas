@@ -60,18 +60,21 @@ public class Menu {
                     System.out.println("            Padre: " + pPadre.getNombre());
                 }
                 if(codigo == key){
-                    System.out.println("Padre : " + pPadre.getNombre());
+                    System.out.println("            Padre : " + pPadre.getNombre());
                 }
                 for(Integer key3: pPadre.getDatos().keySet()){
                     Persona pHijo = pPadre.getDatos().get(key3);
-                    if(codigo == key3){
-                        System.out.println("Hijo: " + pHijo.getNombre());
-                        System.out.println("          Padre: " + pPadre.getNombre());
-                        System.out.println("                      Abuelo: " + pAbuelo.getNombre());
+                    if(codigo == key3){      
+                        System.out.println("Abuelo: " + pAbuelo.getNombre());
+                        System.out.println("          Padre: " + pPadre.getNombre());                        
+                        System.out.println("                     Hijo: " + pHijo.getNombre());
                         break;
                     }
                     if(codigo == key2){
-                        System.out.println("Hijo: " + pHijo.getNombre());
+                        System.out.println("                     Hijo: " + pHijo.getNombre());
+                    }
+                    if(codigo == key){
+                        System.out.println("                     Hijo: " + pHijo.getNombre());
                     }
                 }
             }
