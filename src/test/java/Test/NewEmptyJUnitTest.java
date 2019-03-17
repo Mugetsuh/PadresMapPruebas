@@ -7,6 +7,8 @@ package Test;
 
 import com.mycompany.taller2.Menu;
 import com.mycompany.taller2.Persona;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -23,13 +25,14 @@ public class NewEmptyJUnitTest {
     
     static Menu m;
     static Persona p;
-    static public HashMap<Integer, Persona> mapaAbuelo;
+    static HashMap<Integer, Persona> mapaAbuelo;
     
     public NewEmptyJUnitTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        m = new Menu();
         mapaAbuelo = new HashMap<>();
         mapaAbuelo.put(1, new Persona(1, "Juan", "Galindo"));
         mapaAbuelo.put(2, new Persona(2, "Jose", "Ordoñez"));
@@ -46,12 +49,13 @@ public class NewEmptyJUnitTest {
         mapaAbuelo.get(2).getDatos().get(6).getDatos().put(13, new Persona(13, "Tatiana", "Ordoñez"));
         mapaAbuelo.get(2).getDatos().get(6).getDatos().put(14, new Persona(14, "Fernanda", "Ordoñez"));
         mapaAbuelo.get(2).getDatos().get(7).getDatos().put(15, new Persona(15, "Viviana", "Ordoñez"));
-        mapaAbuelo.get(2).getDatos().get(8).getDatos().put(16, new Persona(16, "Diana", "Ordoñez"));            
+        mapaAbuelo.get(2).getDatos().get(8).getDatos().put(16, new Persona(16, "Diana", "Ordoñez")); 
+        
     }
     
     @AfterClass
     public static void tearDownClass() {
-        mapaAbuelo = null;
+        
     }
     
     @Before
@@ -60,10 +64,21 @@ public class NewEmptyJUnitTest {
     
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void testAbuelo() {
+    }   
     
+    @Test
+    public void testAbuelo(){        
+        ArrayList<String> respuesta = new ArrayList<String>(); 
+        ArrayList<String> comparar = new ArrayList<String>();
+        comparar.add("Jose");
+        comparar.add("Alberto");
+        comparar.add("Tatiana");
+        comparar.add("Fernanda");
+        comparar.add("Jimmy");
+        comparar.add("Viviana");
+        comparar.add("Jhon");
+        comparar.add("Diana");
+        respuesta = m.buscar(mapaAbuelo, 2);
+        assertEquals(comparar, respuesta);
     }
 }

@@ -5,8 +5,10 @@
  */
 package com.mycompany.taller2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -29,9 +31,9 @@ public class Menu {
      */
     int codigo;
     /**
-     * Datos para enviar el resultar de la busqueda
+     * Lista String para enviar el resultar de la busqueda
      */
-    String enviar;
+    ArrayList<String> Listabusqueda = new ArrayList<String>();
     
     /**
      * Metodo donde inicial el programa
@@ -44,7 +46,10 @@ public class Menu {
         buscar(mapaAbuelo,codigo);
     }
 
-    private void quemarMapa() {
+    /**
+     * Metodo para quemar los datos del árbol
+     */
+    public void quemarMapa() {
         mapaAbuelo = new HashMap<>();
         mapaAbuelo.put(1, new Persona(1, "Juan", "Galindo"));
         mapaAbuelo.put(2, new Persona(2, "Jose", "Ordoñez"));
@@ -69,7 +74,7 @@ public class Menu {
      * @param mapaAbuelo Mapa con el cual se hara la busqueda
      * @param codigo codigo de la persona que se desea buscar
      */
-    private String buscar(HashMap<Integer, Persona> mapaAbuelo,int codigo) {
+    public ArrayList<String> buscar(HashMap<Integer, Persona> mapaAbuelo,int codigo) {
         Persona pAbuelo = null;
         Persona pPadre = null;
         Persona pHijo = null;
@@ -77,34 +82,43 @@ public class Menu {
             pAbuelo = mapaAbuelo.get(key);
             if(codigo == key){
                 System.out.println("Abuelo: " + pAbuelo.getNombre());
+                Listabusqueda.add(pAbuelo.getNombre());
             }
             for(Integer key2: pAbuelo.getDatos().keySet()){
                 pPadre = pAbuelo.getDatos().get(key2);
                 if(codigo == key2){                    
                     System.out.println("Abuelo: " + pAbuelo.getNombre());
+                    Listabusqueda.add(pAbuelo.getNombre());
                     System.out.println("            Padre: " + pPadre.getNombre());
+                    Listabusqueda.add(pPadre.getNombre());
                 }
                 if(codigo == key){
                     System.out.println("            Padre : " + pPadre.getNombre());
+                    Listabusqueda.add(pPadre.getNombre());
                 }
                 for(Integer key3: pPadre.getDatos().keySet()){
                     pHijo = pPadre.getDatos().get(key3);
                     if(codigo == key3){      
                         System.out.println("Abuelo: " + pAbuelo.getNombre());
-                        System.out.println("          Padre: " + pPadre.getNombre());                        
+                        Listabusqueda.add(pAbuelo.getNombre());
+                        System.out.println("          Padre: " + pPadre.getNombre()); 
+                        Listabusqueda.add(pPadre.getNombre());
                         System.out.println("                     Hijo: " + pHijo.getNombre());
+                        Listabusqueda.add(pHijo.getNombre());
                         break;
                     }
                     if(codigo == key2){
                         System.out.println("                     Hijo: " + pHijo.getNombre());
+                        Listabusqueda.add(pHijo.getNombre());
                     }
                     if(codigo == key){
                         System.out.println("                     Hijo: " + pHijo.getNombre());
+                        Listabusqueda.add(pHijo.getNombre());
                     }
                 }
             }
-        }
-        return enviar;
+        }        
+        return Listabusqueda;
     }
     
 }
