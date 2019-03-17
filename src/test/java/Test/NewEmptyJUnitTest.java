@@ -26,6 +26,8 @@ public class NewEmptyJUnitTest {
     static Menu m;
     static Persona p;
     static HashMap<Integer, Persona> mapaAbuelo;
+    static ArrayList<String> respuesta;
+    static ArrayList<String> comparar;
     
     public NewEmptyJUnitTest() {
     }
@@ -34,6 +36,8 @@ public class NewEmptyJUnitTest {
     public static void setUpClass() {
         m = new Menu();
         mapaAbuelo = new HashMap<>();
+        respuesta = new ArrayList<String>(); 
+        comparar = new ArrayList<String>();
         mapaAbuelo.put(1, new Persona(1, "Juan", "Galindo"));
         mapaAbuelo.put(2, new Persona(2, "Jose", "Ordoñez"));
         mapaAbuelo.get(1).getDatos().put(3, new Persona(3, "Andres", "Galindo"));
@@ -55,7 +59,11 @@ public class NewEmptyJUnitTest {
     
     @AfterClass
     public static void tearDownClass() {
-        
+        m = null;
+        p = null;
+        mapaAbuelo = null;
+        respuesta = null;
+        comparar = null;
     }
     
     @Before
@@ -67,9 +75,7 @@ public class NewEmptyJUnitTest {
     }   
     
     @Test
-    public void testAbuelo(){        
-        ArrayList<String> respuesta = new ArrayList<String>(); 
-        ArrayList<String> comparar = new ArrayList<String>();
+    public void testAbuelo(){       
         comparar.add("Jose");
         comparar.add("Alberto");
         comparar.add("Tatiana");
@@ -79,6 +85,25 @@ public class NewEmptyJUnitTest {
         comparar.add("Jhon");
         comparar.add("Diana");
         respuesta = m.buscar(mapaAbuelo, 2);
+        assertEquals(comparar, respuesta);
+    }
+    
+    @Test
+    public void testPadre(){        
+  
+        comparar.add("Juan");
+        comparar.add("Carlos");
+        comparar.add("Jaime");
+        respuesta = m.buscar(mapaAbuelo, 5);
+        assertEquals(comparar, respuesta);
+    }
+    
+    @Test
+    public void testHijo(){        
+        comparar.add("Juan");
+        comparar.add("Maria");
+        comparar.add("Sofia");
+        respuesta = m.buscar(mapaAbuelo, 11);
         assertEquals(comparar, respuesta);
     }
 }
