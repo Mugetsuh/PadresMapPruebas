@@ -12,10 +12,30 @@ import java.util.HashMap;
  * @author Diego
  */
 public class Persona {
+    
+    /**
+     * Docuemento de la persona
+     */
     private int documento;
-    private String nombre, apellido;
+    /**
+     * Nombre de la persona
+     */
+    private String nombre;
+    /**
+     * Apellido de la persona
+     */
+    private String apellido;
+    /**
+     * Mapa de persona
+     */
     private HashMap<Integer,Persona> datos;
 
+    /**
+     * Constructor de la clase Persona
+     * @param documento Documento de la persona
+     * @param nombre    Nombre de la persona
+     * @param apellido  Apellido de la persona
+     */
     public Persona(int documento, String nombre, String apellido) {
         this.documento = documento;
         this.nombre = nombre;

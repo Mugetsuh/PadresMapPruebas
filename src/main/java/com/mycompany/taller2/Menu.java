@@ -16,15 +16,32 @@ import java.util.Scanner;
  */
 public class Menu {
 
+    /**
+     * Mapa que guarda el arbol de personas
+     */
     public HashMap<Integer, Persona> mapaAbuelo;
-
-    public void Menu() {
-
-        quemarMapa();
-        Scanner sc = new Scanner(System.in);
+    /**
+     * Metodo para capturar la entrada por consola
+     */
+    Scanner sc = new Scanner(System.in);
+    /**
+     * Variable para capturar la entrada por consola
+     */
+    int codigo;
+    /**
+     * Datos para enviar el resultar de la busqueda
+     */
+    String enviar;
+    
+    /**
+     * Metodo donde inicial el programa
+     */
+    public void Menu() {      
         System.out.println("Digite el codigo que desea buscar:");
-        int codigo = sc.nextInt();
-        buscar(codigo);
+        codigo = sc.nextInt();
+        mapaAbuelo = new HashMap<>();
+        quemarMapa();
+        buscar(mapaAbuelo,codigo);
     }
 
     private void quemarMapa() {
@@ -47,14 +64,22 @@ public class Menu {
         mapaAbuelo.get(2).getDatos().get(8).getDatos().put(16, new Persona(16, "Diana", "Ordoñez"));
     }
 
-    private void buscar(int codigo) {
+    /**
+     * Metodo que busca por el documento que le corresponde a cada persona
+     * @param mapaAbuelo Mapa con el cual se hara la busqueda
+     * @param codigo codigo de la persona que se desea buscar
+     */
+    private String buscar(HashMap<Integer, Persona> mapaAbuelo,int codigo) {
+        Persona pAbuelo = null;
+        Persona pPadre = null;
+        Persona pHijo = null;
         for(Integer key: mapaAbuelo.keySet()){
-            Persona pAbuelo = mapaAbuelo.get(key);
+            pAbuelo = mapaAbuelo.get(key);
             if(codigo == key){
                 System.out.println("Abuelo: " + pAbuelo.getNombre());
             }
             for(Integer key2: pAbuelo.getDatos().keySet()){
-                Persona pPadre = pAbuelo.getDatos().get(key2);
+                pPadre = pAbuelo.getDatos().get(key2);
                 if(codigo == key2){                    
                     System.out.println("Abuelo: " + pAbuelo.getNombre());
                     System.out.println("            Padre: " + pPadre.getNombre());
@@ -63,7 +88,7 @@ public class Menu {
                     System.out.println("            Padre : " + pPadre.getNombre());
                 }
                 for(Integer key3: pPadre.getDatos().keySet()){
-                    Persona pHijo = pPadre.getDatos().get(key3);
+                    pHijo = pPadre.getDatos().get(key3);
                     if(codigo == key3){      
                         System.out.println("Abuelo: " + pAbuelo.getNombre());
                         System.out.println("          Padre: " + pPadre.getNombre());                        
@@ -78,7 +103,8 @@ public class Menu {
                     }
                 }
             }
-        }        
+        }
+        return enviar;
     }
     
 }
